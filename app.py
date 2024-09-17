@@ -22,6 +22,7 @@ def handle_message(message): # When listening for a message events, takes in a m
     print(f"Message: {message}")
     socketio.emit('message', message) #.emit() method broadcasts a special message to everyone connected
     message_db.append(message)
+    return message_db
 
 
 @app.route('/')
