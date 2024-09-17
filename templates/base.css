@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(139, 168, 178);
+  }
+
+#chat-box {
+    border-radius: 25px;
+    background: #27a7ec;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+  }
+
+p {
+    border-style: solid black;
+}
+
+h1 {
+    background-color: black;
+    color: white;
+}

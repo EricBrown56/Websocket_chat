@@ -3,7 +3,7 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 
-message_db = []
+message_storage = []
 socketio = SocketIO()
 
 socketio.init_app(app, cors_allowed_origin = '*')# set cors to allow all origins with *
@@ -21,8 +21,8 @@ def handle_disconnect():
 def handle_message(message): # When listening for a message events, takes in a message as an argument
     print(f"Message: {message}")
     socketio.emit('message', message) #.emit() method broadcasts a special message to everyone connected
-    message_db.append(message)
-    return message_db
+    message_storage.append(message)
+    return message_storage
 
 
 @app.route('/')

@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Websocket Chatroom</title>
+    <link rel="stylesheet" type="text/css" href="base.css">
+    
 </head>
-<body>
-    <h1>Websocket Chatroom</h1>
-    <form id="message-form" onsubmit="addMessage(event)">
 
-        <input id="message-input" type="text">
-        <button id="submit" type="submit">Send</button>
+    <body>
+        <h1>Websocket Chatroom</h1>
+        <form id="message-form" onsubmit="addMessage(event)">
 
-    </form>
-    <div id="chat-box">
+            <input id="message-input" type="text">
+            <button id="submit" type="submit">Send</button>
 
-    </div>
+        </form>
+        <div id="chat-box">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <script>
+        </div>
 
-        const socket = io()
-        const form = document.getElementById("message-form")
-        const input = document.getElementById("message-input")
-        const chatBox = document.getElementById("chat-box")
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+        
+        <script>
 
-        const addMessage = (event) => {
-            event.preventDefault() //prevents page from refreshing on submit
-            const message = input.value;
-           
+            const socket = io()
+            const form = document.getElementById("message-form")
+            const input = document.getElementById("message-input")
+            const chatBox = document.getElementById("chat-box")
 
-            if (message != ''){
+            const addMessage = (event) => {
+                event.preventDefault() //prevents page from refreshing on submit
+                const message = input.value;
+            
 
-                socket.emit('message', message)
+                if (message != ''){
+
+                    socket.emit('message', message)
+                }
+                input.value = ''
             }
-            input.value = ''
-        }
 
-        socket.on("message", (message) => {
-            const p = document.createElement('p')
-            p.textContent = message
-            chatBox.appendChild(p)
+            socket.on("message", (message) => {
+                const p = document.createElement('p')
+                p.textContent = message
+                chatBox.appendChild(p)
 
-        })
+            })
 
-    </script>
-</body>
+        </script>
+    </body>
+
 </html>
